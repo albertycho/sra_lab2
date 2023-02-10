@@ -32,9 +32,18 @@ void maccess(ADDR_PTR addr)
 
 
 /* Loads addr and measure the access time */
+tmpcount = 0;
 CYCLES maccess_t(ADDR_PTR addr)
 {
   CYCLES cycles;
+  
+  /////debug code TODO REMOVE
+  tmpcount++;
+  cycles = 100;
+  if(tmpcount%3==0)  cycles = 150;
+  return cycles;
+  /////debug code TODO REMOVE
+
 
   // TODO:
   // Use a mov instruction to load an address "addr",

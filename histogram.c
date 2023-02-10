@@ -41,6 +41,8 @@ int main(int argc, char **argv)
   //---------------------------------------
   //1. Initialize State
   //TODO: Load and Flush addr
+  maccess(addr);
+  clflush(addr);
 
   //---------------------------------------------------------------------------
 
@@ -48,7 +50,15 @@ int main(int argc, char **argv)
   //TODO: Perform the following NUM_ITER times:  
   for (int i=0; i< NUM_ITER;i++){
     //Flush
+    clflush(addr);
     //Load and Time Access
+    CYCLES a_t = maccess_t(addr);
+    if (a_t < NUM_LAT_BUCKETS) {
+        misses_lat_histogram[a_t]++;
+    }
+    else { // a_t larger than biggest bucket
+        misses_lat_histogram[NUM_LAT_BUCKETS]++;
+    }
     //Update appropriate latency bucket of histogram
     num_miss_accesses++;
   }
@@ -60,8 +70,17 @@ int main(int argc, char **argv)
 
   //Perform the following NUM_ITER times:
   for (int i=0; i< NUM_ITER;i++){
+    maccess(addr); // load to put it in cache first
     //TODO: Load and Time Access
+    CYCLES a_t = maccess_t(addr);
     //TODO: Update appropriate latency bucket of histogram
+    CYCLES a_t = maccess_t(addr);
+    if (a_t < NUM_LAT_BUCKETS) {
+        misses_lat_histogram[a_t]++;
+    }
+    else { // a_t larger than biggest bucket
+        misses_lat_histogram[NUM_LAT_BUCKETS]++;
+    }
     num_hit_accesses++;
   }
 
