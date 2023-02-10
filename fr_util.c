@@ -23,7 +23,7 @@ void maccess(ADDR_PTR addr)
     uint64_t dummy;
   //TODO: Use mov instruction.
   asm volatile("movq %1, %0"
-	       : /*output*/ "=r" (dummy)
+	       : /*output*/ "=a" (dummy)
 	       : /*input*/ "r"(addr)
 	       : /*clobbers*/  );
   
@@ -43,15 +43,26 @@ CYCLES maccess_t(ADDR_PTR addr)
   //return cycles;
   /////debug code TODO REMOVE
 
-
+  CYCLES cycle1, cycle2;
   // TODO:
   // Use a mov instruction to load an address "addr",
   // which is sandwiched between two rdtscp instructions.
   // Calculate the latency using difference of the output of two rdtscps.
-  asm volatile(""
+
+  asm volatile("rdtscp\n"
+            "shl $32,%%rdx\n"
+            "or %%rdx, %%rax\n"
+            "movq %%rax, %%rbx\n"
+            //do the mem access
+            "movq %1, %%rcx"
+            //get finishtime 
+            "rdtscp\n"
+            "shl $32,%%rdx\n"
+            "or %%rdx, %%rax\n"
+            "subq %%rbx, %%rax\n"      
 	       : /*output*/ "=a"(cycles)
 	       : /*input*/  "r"(addr)
-	       : /*clobbers*/ );    
+	       : /*clobbers*/ "%rcx");
   return cycles;
 }
 
