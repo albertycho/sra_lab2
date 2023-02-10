@@ -9,23 +9,31 @@
 extern inline __attribute__((always_inline))
 void clflush(ADDR_PTR addr)
 {
+	//printf("before calling clflushasm\n");
   //TODO: Use clflush instruction.
   asm volatile ("clflush (%0)"
 		: /*output*/
 		: /*input*/ "r"(addr)
 		: /*clobbers*/ );
+	//printf("after calling clflushasm\n");
 }
 
 
 /* Load address "addr" */
 void maccess(ADDR_PTR addr)
 {
+	printf("addr: %lx\n",addr);
+	printf("before calling memaccess_asm\n");
     uint64_t dummy;
   //TODO: Use mov instruction.
-  asm volatile("movq (%1), %0"
-	       : /*output*/ "=r" (dummy)
+  //asm volatile("movq %1, (%0)"
+  asm volatile("movq %%rsi, (%0)"
+	       //: /*output*/ "=r" (dummy)
+	       :
 	       : /*input*/ "r"(addr)
-	       : /*clobbers*/  );
+	       //: /*clobbers*/  );
+	       : /*clobbers*/ "%rsi" );
+	printf("after calling memaccess_asm\n");
   
   return;
 }
@@ -34,6 +42,7 @@ void maccess(ADDR_PTR addr)
 /* Loads addr and measure the access time */
 CYCLES maccess_t(ADDR_PTR addr)
 {
+	//printf("addr: %lx\n",addr);
   CYCLES cycles;
   
   /////debug code TODO REMOVE
@@ -49,21 +58,72 @@ CYCLES maccess_t(ADDR_PTR addr)
   // which is sandwiched between two rdtscp instructions.
   // Calculate the latency using difference of the output of two rdtscps.
 
-  asm volatile("rdtscp\n"
-            "shl $32,%%rdx\n"
-            "or %%rdx, %%rax\n"
-            "movq %%rax, %%rbx\n"
-            //do the mem access
-            "movq (%1), %%rcx\n"
-            //get finishtime 
-            "rdtscp\n"
-            "shl $32,%%rdx\n"
-            "or %%rdx, %%rax\n"
-            "subq %%rbx, %%rax\n"      
-	       : /*output*/ "=a"(cycles)
-	       : /*input*/  "r"(addr)
-	       : /*clobbers*/ "%rcx");
-  return cycles;
+	//printf("before calling memaccess_t_asm1\n");
+//  asm volatile("movq %%rsi, (%0)"
+//	       //: /*output*/ "=r" (dummy)
+//	       :
+//	       : /*input*/ "r"(addr)
+//	       //: /*clobbers*/  );
+//	       : /*clobbers*/ "%rsi" );
+//	printf("after calling memaccess_t_asm2\n");
+//  asm volatile("rdtscp\n"
+//            "shl $32,%%rdx\n"
+//            "or %%rdx, %%rax\n"
+//            //"movq %%rax, %%rbx\n"
+//		"movq %%rsi, (%0)\n"
+//	       //: /*output*/ "=r" (dummy)
+//	       :"=a"(cycle1)
+//	       : /*input*/ "r"(addr)
+//	       //: /*clobbers*/  );
+//	       : /*clobbers*/ "%rsi" );
+//
+//  	printf("after calling memaccess_t_asm2\n");
+
+  asm volatile ("rdtscp\n"
+		"shl $32,%%rdx\n"
+		"or %%rdx, %%rax\n"		      
+		: /* outputs */ "=a" (cycle1));
+
+  asm volatile("movq %%rsi, (%0)"
+	       //: /*output*/ "=r" (dummy)
+	       :
+	       : /*input*/ "r"(addr)
+	       //: /*clobbers*/  );
+	       : /*clobbers*/ "%rsi" );
+
+
+  asm volatile ("rdtscp\n"
+		"shl $32,%%rdx\n"
+		"or %%rdx, %%rax\n"		      
+		: /* outputs */ "=a" (cycle2));
+
+  return cycle2-cycle1;
+
+  asm volatile("subq %1, %0"
+	       //: /*output*/ "=r" (dummy)
+	       : "=r"(cycle2)
+	       : /*input*/ "r"(cycle1)
+	       //: /*clobbers*/  );
+	       : /*clobbers*/  );
+
+
+//  asm volatile("rdtscp\n"
+//            "shl $32,%%rdx\n"
+//            "or %%rdx, %%rax\n"
+//            "movq %%rax, %%rbx\n"
+//            //do the mem access
+//            "movq %%rsi, (%%rcx)\n"
+//            //get finishtime 
+//            "rdtscp\n"
+//            "shl $32,%%rdx\n"
+//            "or %%rdx, %%rax\n"
+//            "subq %%rbx, %%rax\n"      
+//	       : /*output*/ "=a"(cycles)
+//	       : /*input*/  "c"(addr)
+//	       : /*clobbers*/ "%rsi");
+	printf("after calling memaccess_t_asm\n");
+  //return cycles;
+  return cycle2;
 }
 
 
