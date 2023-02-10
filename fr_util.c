@@ -20,10 +20,10 @@ void clflush(ADDR_PTR addr)
 /* Load address "addr" */
 void maccess(ADDR_PTR addr)
 {
-
+    int dummy;
   //TODO: Use mov instruction.
   asm volatile("movl %1, %0"
-	       : /*output*/ "=r"
+	       : /*output*/ "=r" (dummy)
 	       : /*input*/ "r"(addr)
 	       : /*clobbers*/  );
   
