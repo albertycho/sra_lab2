@@ -33,7 +33,7 @@ void maccess(ADDR_PTR addr)
 	       : /*input*/ "r"(addr)
 	       //: /*clobbers*/  );
 	       : /*clobbers*/ "%rsi" );
-	printf("after calling memaccess_asm\n");
+	//printf("after calling memaccess_asm\n");
   
   return;
 }
@@ -42,15 +42,8 @@ void maccess(ADDR_PTR addr)
 /* Loads addr and measure the access time */
 CYCLES maccess_t(ADDR_PTR addr)
 {
-	//printf("addr: %lx\n",addr);
   CYCLES cycles;
   
-  /////debug code TODO REMOVE
-  //tmpcount++;
-  //cycles = 100;
-  //if(tmpcount%3==0)  cycles = 150;
-  //return cycles;
-  /////debug code TODO REMOVE
 
   CYCLES cycle1, cycle2;
   // TODO:
@@ -58,55 +51,53 @@ CYCLES maccess_t(ADDR_PTR addr)
   // which is sandwiched between two rdtscp instructions.
   // Calculate the latency using difference of the output of two rdtscps.
 
-	//printf("before calling memaccess_t_asm1\n");
-//  asm volatile("movq %%rsi, (%0)"
-//	       //: /*output*/ "=r" (dummy)
-//	       :
-//	       : /*input*/ "r"(addr)
-//	       //: /*clobbers*/  );
-//	       : /*clobbers*/ "%rsi" );
-//	printf("after calling memaccess_t_asm2\n");
-//  asm volatile("rdtscp\n"
-//            "shl $32,%%rdx\n"
-//            "or %%rdx, %%rax\n"
-//            //"movq %%rax, %%rbx\n"
-//		"movq %%rsi, (%0)\n"
-//	       //: /*output*/ "=r" (dummy)
-//	       :"=a"(cycle1)
-//	       : /*input*/ "r"(addr)
-//	       //: /*clobbers*/  );
-//	       : /*clobbers*/ "%rsi" );
-//
-//  	printf("after calling memaccess_t_asm2\n");
-
   asm volatile ("rdtscp\n"
-		"shl $32,%%rdx\n"
-		"or %%rdx, %%rax\n"		      
-		: /* outputs */ "=a" (cycle1));
+        	"shl $32,%%rdx\n"
+        	"or %%rdx, %%rax\n"		      
+        	: /* outputs */ "=a" (cycle1));
 
-  asm volatile("movq %%rsi, (%0)"
-	       //: /*output*/ "=r" (dummy)
-	       :
-	       : /*input*/ "r"(addr)
-	       //: /*clobbers*/  );
-	       : /*clobbers*/ "%rsi" );
+  //asm volatile("movq %%rsi, (%0)"
+  //asm volatile("movq (%0), %%rsi" // CONFIRMED TO BE CORRECT ORDER
+  asm volatile("movq (%%rcx), %%rsi" // CONFIRMED TO BE CORRECT ORDER
+               //: /*output*/ "=r" (dummy)
+               :
+               //: /*input*/ "r"(addr)
+               : /*input*/ "c"(addr)
+               //: /*clobbers*/  );
+               : /*clobbers*/ "%rsi" );
 
 
   asm volatile ("rdtscp\n"
+        	"shl $32,%%rdx\n"
+        	"or %%rdx, %%rax\n"
+        	"subq %%rbx, %%rax" // this confiremd to be the right order of src dest
+        	: /* outputs */ "=a" (cycle2)
+        	: "b" (cycle1));
+
+  return cycle2;
+
+	/////////////CODE ABOVE WORKS, but trying to put it in one asm func
+
+  asm volatile ("rdtscp\n"
 		"shl $32,%%rdx\n"
-		"or %%rdx, %%rax\n"		      
-		: /* outputs */ "=a" (cycle2));
+		"or %%rdx, %%rax\n"
+		"movq %%rax, %%rbx\n"//starttime in rbx
+		"movq (%%rcx), %%rsi\n"//maccess
+		"rdtscp\n"
+                "shl $32,%%rdx\n"
+    	        "or %%rdx, %%rax\n"
+		"subq %%rbx, %%rax\n"//rax=endtime-startime=rax-rbx
+		: "=a" (cycles)
+		: "c" (addr)
+		: "%rsi");
+	
+  return cycles;
+		
 
-  return cycle2-cycle1;
-
-  asm volatile("subq %1, %0"
-	       //: /*output*/ "=r" (dummy)
-	       : "=r"(cycle2)
-	       : /*input*/ "r"(cycle1)
-	       //: /*clobbers*/  );
-	       : /*clobbers*/  );
 
 
+
+	
 //  asm volatile("rdtscp\n"
 //            "shl $32,%%rdx\n"
 //            "or %%rdx, %%rax\n"
