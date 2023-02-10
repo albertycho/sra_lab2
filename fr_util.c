@@ -54,7 +54,7 @@ CYCLES maccess_t(ADDR_PTR addr)
             "or %%rdx, %%rax\n"
             "movq %%rax, %%rbx\n"
             //do the mem access
-            "movq %1, %%rcx"
+            "movq %1, %%rcx\n"
             //get finishtime 
             "rdtscp\n"
             "shl $32,%%rdx\n"
