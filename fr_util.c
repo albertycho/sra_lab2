@@ -22,8 +22,8 @@ void maccess(ADDR_PTR addr)
 {
     uint64_t dummy;
   //TODO: Use mov instruction.
-  asm volatile("movq %1, %0"
-	       : /*output*/ "=a" (dummy)
+  asm volatile("movq (%1), %0"
+	       : /*output*/ "=r" (dummy)
 	       : /*input*/ "r"(addr)
 	       : /*clobbers*/  );
   
@@ -54,7 +54,7 @@ CYCLES maccess_t(ADDR_PTR addr)
             "or %%rdx, %%rax\n"
             "movq %%rax, %%rbx\n"
             //do the mem access
-            "movq %1, %%rcx\n"
+            "movq (%1), %%rcx\n"
             //get finishtime 
             "rdtscp\n"
             "shl $32,%%rdx\n"
