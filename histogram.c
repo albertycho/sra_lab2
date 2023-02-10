@@ -67,14 +67,13 @@ int main(int argc, char **argv)
 
   //3. Get Hits Histogram.
   //TODO: Load addr once.
-
+  maccess(addr); // load to put it in cache first
+  
   //Perform the following NUM_ITER times:
   for (int i=0; i< NUM_ITER;i++){
-    maccess(addr); // load to put it in cache first
     //TODO: Load and Time Access
     CYCLES a_t = maccess_t(addr);
     //TODO: Update appropriate latency bucket of histogram
-    CYCLES a_t = maccess_t(addr);
     if (a_t < NUM_LAT_BUCKETS) {
         misses_lat_histogram[a_t]++;
     }
