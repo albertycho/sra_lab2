@@ -10,7 +10,7 @@ extern inline __attribute__((always_inline))
 void clflush(ADDR_PTR addr)
 {
   //TODO: Use clflush instruction.
-  asm volatile (""
+  asm volatile ("clflush (%0)"
 		: /*output*/
 		: /*input*/ "r"(addr)
 		: /*clobbers*/ );
