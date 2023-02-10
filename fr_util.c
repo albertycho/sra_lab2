@@ -22,8 +22,8 @@ void maccess(ADDR_PTR addr)
 {
 
   //TODO: Use mov instruction.
-  asm volatile(""
-	       : /*output*/
+  asm volatile("movl %1, %0"
+	       : /*output*/ "=r"
 	       : /*input*/ "r"(addr)
 	       : /*clobbers*/  );
   
@@ -32,16 +32,15 @@ void maccess(ADDR_PTR addr)
 
 
 /* Loads addr and measure the access time */
-tmpcount = 0;
 CYCLES maccess_t(ADDR_PTR addr)
 {
   CYCLES cycles;
   
   /////debug code TODO REMOVE
-  tmpcount++;
-  cycles = 100;
-  if(tmpcount%3==0)  cycles = 150;
-  return cycles;
+  //tmpcount++;
+  //cycles = 100;
+  //if(tmpcount%3==0)  cycles = 150;
+  //return cycles;
   /////debug code TODO REMOVE
 
 
