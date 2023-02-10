@@ -75,10 +75,10 @@ int main(int argc, char **argv)
     CYCLES a_t = maccess_t(addr);
     //TODO: Update appropriate latency bucket of histogram
     if (a_t < NUM_LAT_BUCKETS) {
-        misses_lat_histogram[a_t]++;
+        hits_lat_histogram[a_t]++;
     }
     else { // a_t larger than biggest bucket
-        misses_lat_histogram[NUM_LAT_BUCKETS]++;
+        hits_lat_histogram[NUM_LAT_BUCKETS]++;
     }
     num_hit_accesses++;
   }
