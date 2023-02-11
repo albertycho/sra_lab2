@@ -274,7 +274,7 @@ sleep(2);
       //fprintf(fptr,"%d, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
       int j = i - 1;
       if (i == 0) j = 0;
-      fprintf(fptr, "%d, %lx, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], detect_start_t[i]-detect_start_t[j] r_bits[i]);
+      fprintf(fptr, "%d, %lx, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], detect_start_t[i]-detect_start_t[j], r_bits[i]);
   }
   fclose(fptr);
 
