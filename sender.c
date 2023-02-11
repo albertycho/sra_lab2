@@ -49,8 +49,8 @@ void send_bit(bool one, struct config *config){
   }
   if (SYNC_DBG) {
       s_bits[send_count] = one;
-      s_start_t[send_count] = start_t & (0xFFC0000);
-      s_end_t[send_count] = rdtscp() & (0xFFC0000);
+      s_start_t[send_count] = start_t & (0xFFF0000);
+      s_end_t[send_count] = rdtscp() & (0xFFF0000);
       send_count++;
       if (send_count > 200) printf("detection count over 200\n");
   }

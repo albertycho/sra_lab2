@@ -111,8 +111,8 @@ bool detect_bit(struct config *config)
   if (SYNC_DBG) {
       if (handshake_done) {
           r_bits[detection_count] = detected_bit;
-          detect_start_t[detection_count] = start_t & (0xFFC0000);
-          detect_end_t[detection_count] = rdtscp() & (0xFFC0000);
+          detect_start_t[detection_count] = start_t & (0xFFF0000);
+          detect_end_t[detection_count] = rdtscp() & (0xFFF0000);
           detection_count++;
           if (detection_count > 200) printf("detection count over 200\n");
       }
