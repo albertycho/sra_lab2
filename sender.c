@@ -14,11 +14,14 @@
  */
 
 void send_bit(bool one, struct config *config){
+//printf("in send_bit\n");
   ADDR_PTR addr = config->addr;
   uint64_t interval = config->tx_interval;
 
+//printf("call cc_sync\n");
   // Synchronize with receiver
   CYCLES start_t = cc_sync(config->sync_time_mask, config->sync_jitter);
+//printf("cc_sync returned\n");
 
   
   //TODO:
@@ -29,7 +32,9 @@ void send_bit(bool one, struct config *config){
       //TODO while rdtsc is < end of tx_interval, 1: keep accessing bit 0: do nothing
   while (rdtscp() < t_end) {
       if (one) {
+	//printf("call maccess\n");
           maccess(addr);
+	//printf("maccess returned\n");
       }
       else {
       }

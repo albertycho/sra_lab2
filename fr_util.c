@@ -27,7 +27,7 @@ void maccess(ADDR_PTR addr)
     uint64_t dummy;
   //TODO: Use mov instruction.
   //asm volatile("movq %1, (%0)"
-  asm volatile("movq %%rsi, (%0)"
+  asm volatile("movq (%%rdi), %%rsi"
 	       //: /*output*/ "=r" (dummy)
 	       :
 	       : /*input*/ "r"(addr)
