@@ -52,9 +52,9 @@ void wait_install(CYCLES deadline) {
  */
 //dbgcounter TODO remove
 uint64_t detection_count = 0;
-int[200] r_bits;
-uint64_t[200] detect_start_t;
-uint64_t[200] detect_end_t;
+uint64_t r_bits[200];
+uint64_t detect_start_t[200];
+uint64_t detect_end_t[200];
 
 bool detect_bit(struct config *config)
 {
