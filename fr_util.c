@@ -22,8 +22,8 @@ void clflush(ADDR_PTR addr)
 /* Load address "addr" */
 void maccess(ADDR_PTR addr)
 {
-	printf("addr: %lx\n",addr);
-	printf("before calling memaccess_asm\n");
+	//printf("addr: %lx\n",addr);
+	//printf("before calling memaccess_asm\n");
     uint64_t dummy;
   //TODO: Use mov instruction.
   //asm volatile("movq %1, (%0)"
@@ -44,6 +44,31 @@ CYCLES maccess_t(ADDR_PTR addr)
 {
   CYCLES cycles;
   
+
+
+
+  ///////////Working on single asm volatile version
+  asm volatile (
+		"rdtscp\n"
+		"shl $32,%%rdx\n"
+		"or %%rdx, %%rax\n"
+		"movq %%rax, %%rbx\n"//starttime in rbx
+		"movq (%%rdi), %%rsi\n"//maccess
+		"rdtscp\n"
+                "shl $32,%%rdx\n"
+    	        "or %%rdx, %%rax\n"
+		"subq %%rbx, %%rax\n"//rax=endtime-startime=rax-rbx
+		: "=a" (cycles)
+		: "D" (addr)
+		: "%rsi");
+	
+  return cycles;
+//////above works 	
+
+
+
+  
+////////////////////////Working version below
 
   CYCLES cycle1, cycle2;
   // TODO:
@@ -78,23 +103,6 @@ CYCLES maccess_t(ADDR_PTR addr)
 
 	/////////////CODE ABOVE WORKS, but trying to put it in one asm func
 
-  asm volatile ("rdtscp\n"
-		"shl $32,%%rdx\n"
-		"or %%rdx, %%rax\n"
-		"movq %%rax, %%rbx\n"//starttime in rbx
-		"movq (%%rcx), %%rsi\n"//maccess
-		"rdtscp\n"
-                "shl $32,%%rdx\n"
-    	        "or %%rdx, %%rax\n"
-		"subq %%rbx, %%rax\n"//rax=endtime-startime=rax-rbx
-		: "=a" (cycles)
-		: "c" (addr)
-		: "%rsi");
-	
-  return cycles;
-		
-
-
 
 
 	
@@ -112,9 +120,9 @@ CYCLES maccess_t(ADDR_PTR addr)
 //	       : /*output*/ "=a"(cycles)
 //	       : /*input*/  "c"(addr)
 //	       : /*clobbers*/ "%rsi");
-	printf("after calling memaccess_t_asm\n");
-  //return cycles;
-  return cycle2;
+	//printf("after calling memaccess_t_asm\n");
+ //return cycles;
+//  return cycle2;
 }
 
 
