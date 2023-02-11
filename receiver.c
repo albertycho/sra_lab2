@@ -260,7 +260,7 @@ int main(int argc, char **argv)
   /*   /\* printf("DEBUG_ARRAY[%d]: %ld\n",i,debug_array[i]); *\/ */
   /* } */
   
-  printf("receiver done. index, start_t, end_t, value")
+  printf("receiver done. index, start_t, end_t, value\n");
   for (int i = 0; i < detection_count; i++) {
       printf("%d, %d, %d, %d\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
   }
