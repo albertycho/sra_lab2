@@ -24,6 +24,18 @@ void send_bit(bool one, struct config *config){
   //TODO:
   // If 1: Load repeatedly (using maccess()) for the length of the config->tx_interval.
   // If 0: Do nothing for the length of the config->tx_interval.
+
+  uint64_t t_end = start_t + interval;
+      //TODO while rdtsc is < end of tx_interval, 1: keep accessing bit 0: do nothing
+  while (rdtscp() < t_end) {
+      if (one) {
+          maccess(addr);
+      }
+      else {
+      }
+  }
+  return;
+
 }
 
 //---------------------------------------------------------------------------

@@ -148,6 +148,14 @@ CYCLES cc_sync(uint64_t SYNC_TIME_MASK, uint64_t SYNC_JITTER) {
   //TODO:
   //Get the current counter value by masking lower bits of rdtscp using SYNC_TIME_MASK
   //Spin until current counter value overflows and is within SYNC_JITTER.
+  //end_sync_cycle = rdtscp();
+  while (1) {
+      end_sync_cycle = rdtscp();
+      if ((end_sync_cycle & SYNC_TIME_MASK) <= SYNC_JITTER) {
+          return end_sync_cycle;
+      }
+      
+  }
   return end_sync_cycle;
 }
 

@@ -26,6 +26,18 @@ int rx_bits_received;
 //---------------------------------------------------------------------------
 
 
+//helper
+void wait_install(CYCLES deadline) {
+    CYCLES end_t = rdtscp() + 1000;
+    if (end_t > deadline) { end_t = deadline; }
+    //just wait in spinlock
+    int dummy = 0;
+    while (rdtscp() < end_t) {
+        dummy++;
+    }
+    return;
+}
+
 //***************************************************
 // Detect_bit(): Function executed to receive each bit.
 //***************************************************
@@ -45,7 +57,7 @@ bool detect_bit(struct config *config)
 
   int misses = 0;
   int hits = 0;
-  bool detected_bit;
+  bool detected_bit = 0;
   
   // Synchronize with sender
   CYCLES start_t = cc_sync(config->sync_time_mask, config->sync_jitter);
@@ -67,6 +79,23 @@ bool detect_bit(struct config *config)
   // Decide if sender sent 1 or 0 (based on whether more hits or misses in interval)
 
   // DEBUG: /* debug_array[(debug_entry++)%DEBUG_LEN] = detected_bit;  */
+  CYCLES end_t = start_t + interval;
+  CYCLES mat;
+  while (rdtscp() < t_end) {
+      clflush(addr);
+      wait_install(end_t);
+      mat=maccess_t(addr);
+      if (mat < CACHE_MISS_LATENCY) {
+          hits++;
+      }
+      else {
+          misses++;
+      }
+  }
+
+  if (misses < hits) {
+      detected_bit = 1;
+  }
 
   return detected_bit;
 }
