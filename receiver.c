@@ -269,9 +269,12 @@ int main(int argc, char **argv)
 
 sleep(2);
 	FILE *fptr = fopen("RECV_dbg.txt", "w");
-  fprintf(fptr,"receiver done. index, start_t, end_t, value\n");
+  fprintf(fptr,"receiver done. index, start_t, end_t, start_t delta from rev, value\n");
   for (int i = 0; i < detection_count; i++) {
-      fprintf(fptr,"%d, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
+      //fprintf(fptr,"%d, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
+      int j = i - 1;
+      if (i == 0) j = 0;
+      fprintf(fptr, "%d, %lx, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], detect_start_t[i]-detect_start_t[j] r_bits[i]);
   }
   fclose(fptr);
 

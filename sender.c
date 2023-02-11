@@ -118,9 +118,12 @@ int main(int argc, char **argv)
 /////debug
 
   FILE *fptr = fopen("SENDER_dbg.txt", "w");
-  fprintf(fptr,"SENDER done. index, start_t, end_t, value\n");
+  fprintf(fptr,"SENDER done. index, start_t, end_t, start_t delta from rev, value\n");
   for (int i = 0; i < send_count-8; i++) {
-      fprintf(fptr,"%d, %lx, %lx, %ld\n", i, s_start_t[i+8], s_end_t[i+8], s_bits[i+8]);
+      int j = i - 1;
+      if (i == 0) j = 0;
+      //fprintf(fptr,"%d, %lx, %lx, %ld\n", i, s_start_t[i+8], s_end_t[i+8], s_bits[i+8]);
+      fprintf(fptr, "%d, %lx, %lx, %lx, %ld\n", i, s_start_t[i + 8], s_end_t[i + 8], s_start_t[i+8]-s_start_t[i+7], s_bits[i + 8]);
   }
   fclose(fptr);
 
