@@ -81,7 +81,7 @@ bool detect_bit(struct config *config)
   // DEBUG: /* debug_array[(debug_entry++)%DEBUG_LEN] = detected_bit;  */
   CYCLES end_t = start_t + interval;
   CYCLES mat;
-  while (rdtscp() < t_end) {
+  while (rdtscp() < end_t) {
       clflush(addr);
       wait_install(end_t);
       mat=maccess_t(addr);
