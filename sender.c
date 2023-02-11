@@ -34,7 +34,7 @@ void send_bit(bool one, struct config *config){
   // If 0: Do nothing for the length of the config->tx_interval.
 
   uint64_t t_end = start_t + interval;
-  end_t = end_t & config->sync_time_mask;
+  t_end = t_end & config->sync_time_mask;
       //TODO while rdtsc is < end of tx_interval, 1: keep accessing bit 0: do nothing
   while (rdtscp() < t_end) {
       if (one) {
