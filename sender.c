@@ -12,6 +12,11 @@
  * - Send a bit 1 to the receiver by repeatedly accessing an address.
  * - Send a bit 0 by doing nothing
  */
+uint64_t send_count = 0;
+uint64_t s_bits[200];
+uint64_t s_start_t[200];
+uint64_t s_end_t[200];
+
 
 void send_bit(bool one, struct config *config){
 //printf("in send_bit\n");
@@ -39,6 +44,13 @@ void send_bit(bool one, struct config *config){
       else {
       }
   }
+
+  s_bits[send_count] = one;
+  s_start_t[send_count] = start_t&(0xFFC0000) ;
+  s_end_t[send_count] = rdtscp() &(0xFFC0000);
+  send_count++;
+  if(send_count > 200) printf("detection count over 200\n");
+
   return;
 
 }
@@ -103,6 +115,18 @@ int main(int argc, char **argv)
     }
  
     printf("Sender finished\n");
+/////debug
+
+  FILE *fptr = fopen("SENDER_dbg.txt", "w");
+  fprintf(fptr,"SENDER done. index, start_t, end_t, value\n");
+  for (int i = 0; i < send_count-8; i++) {
+      fprintf(fptr,"%d, %lx, %lx, %ld\n", i, s_start_t[i+8], s_end_t[i+8], s_bits[i+8]);
+  }
+  fclose(fptr);
+
+/////debug
+
+
     return 0;
 }
 

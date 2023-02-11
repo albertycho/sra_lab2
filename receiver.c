@@ -56,8 +56,11 @@ uint64_t r_bits[200];
 uint64_t detect_start_t[200];
 uint64_t detect_end_t[200];
 
+bool handshake_done = 0;
+
 bool detect_bit(struct config *config)
 {
+//printf("detect_bit called\n");
   ADDR_PTR addr = config->addr;
   uint64_t interval = config->tx_interval;
 
@@ -104,11 +107,13 @@ bool detect_bit(struct config *config)
   }
 
   ///// DEGBUG code/////
-  
+  if(handshake_done){
   r_bits[detection_count] = detected_bit;
-  detect_start_t[detection_count] = start_t;
-  detect_end_t[detection_count] = rdtscp();
+  detect_start_t[detection_count] = start_t&(0xFFC0000) ;
+  detect_end_t[detection_count] = rdtscp() &(0xFFC0000);
   detection_count++;
+  if(detection_count > 200) printf("detection count over 200\n");
+  }
 
   ///// DEGBUG code/////
 
@@ -153,6 +158,8 @@ int main(int argc, char **argv)
     
     // Detect the sequence '101011' that indicates sender is sending a message    
     if (flip_sequence == 0 && current == 1 && previous == 1) {
+    	//TODO remove debug print
+	handshake_done=1;
       // Got 1010 (flip_sequence==0) and then 11
       int binary_msg_len = 0;
       int strike_zeros = 0;
@@ -259,11 +266,14 @@ int main(int argc, char **argv)
   /*   //bit values */
   /*   /\* printf("DEBUG_ARRAY[%d]: %ld\n",i,debug_array[i]); *\/ */
   /* } */
-  
-  printf("receiver done. index, start_t, end_t, value\n");
+
+sleep(2);
+	FILE *fptr = fopen("RECV_dbg.txt", "w");
+  fprintf(fptr,"receiver done. index, start_t, end_t, value\n");
   for (int i = 0; i < detection_count; i++) {
-      printf("%d, %d, %d, %d\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
+      fprintf(fptr,"%d, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
   }
+  fclose(fptr);
 
   
   return 0;

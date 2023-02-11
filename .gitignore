@@ -2,6 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 rec.out
+debugD
+debugD/*
 fr_util.o
 histogram
 histogram.out
