@@ -30,7 +30,7 @@ void maccess(ADDR_PTR addr)
   asm volatile("movq (%%rdi), %%rsi"
 	       //: /*output*/ "=r" (dummy)
 	       :
-	       : /*input*/ "r"(addr)
+	       : /*input*/ "D"(addr)
 	       //: /*clobbers*/  );
 	       : /*clobbers*/ "%rsi" );
 	//printf("after calling memaccess_asm\n");
