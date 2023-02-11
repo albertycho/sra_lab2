@@ -15,6 +15,7 @@
 #include <errno.h>
 #include <string.h>
 
+#define SYNC_DBG 1
 
 #ifndef UTIL_H_
 #define UTIL_H_
