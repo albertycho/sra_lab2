@@ -50,6 +50,12 @@ void wait_install(CYCLES deadline) {
  * - Detect a bit 0 otherwise.
  * Then, flush the address to get ready for the next bit.
  */
+//dbgcounter TODO remove
+uint64_t detection_count = 0;
+int[200] r_bits;
+uint64_t[200] detect_start_t;
+uint64_t[200] detect_end_t;
+
 bool detect_bit(struct config *config)
 {
   ADDR_PTR addr = config->addr;
@@ -96,6 +102,16 @@ bool detect_bit(struct config *config)
   if (misses < hits) {
       detected_bit = 1;
   }
+
+  ///// DEGBUG code/////
+  
+  r_bits[detection_count] = detected_bit;
+  detect_start_t[detection_count] = start_t;
+  detect_end_t[detection_count] = rdtscp();
+  detection_count++;
+
+  ///// DEGBUG code/////
+
 
   return detected_bit;
 }
@@ -243,6 +259,11 @@ int main(int argc, char **argv)
   /*   //bit values */
   /*   /\* printf("DEBUG_ARRAY[%d]: %ld\n",i,debug_array[i]); *\/ */
   /* } */
+  
+  printf("receiver done. index, start_t, end_t, value")
+  for (int i = 0; i < detection_count; i++) {
+      printf("%d, %d, %d, %d\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
+  }
 
   
   return 0;
