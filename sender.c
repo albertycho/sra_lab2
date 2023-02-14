@@ -47,13 +47,13 @@ void send_bit(bool one, struct config *config){
       else {
       }
   }
-  if (SYNC_DBG) {
-      s_bits[send_count] = one;
-      s_start_t[send_count] = start_t & (0xFFF0000);
-      s_end_t[send_count] = rdtscp() & (0xFFF0000);
-      send_count++;
-      if (send_count > 200) printf("detection count over 200\n");
-  }
+  //if (SYNC_DBG) {
+  //    s_bits[send_count] = one;
+  //    s_start_t[send_count] = start_t & (0xFFF0000);
+  //    s_end_t[send_count] = rdtscp() & (0xFFF0000);
+  //    send_count++;
+  //    if (send_count > 200) printf("detection count over 200\n");
+  //}
   return;
 
 }
@@ -119,18 +119,18 @@ int main(int argc, char **argv)
  
     printf("Sender finished\n");
 /////debug
-    if (SYNC_DBG) {
+    //if (SYNC_DBG) {
 
-        FILE* fptr = fopen("SENDER_dbg.txt", "w");
-        fprintf(fptr, "SENDER done. index, start_t, end_t, start_t delta from rev, value\n");
-        for (int i = 0; i < send_count - 8; i++) {
-            int j = i - 1;
-            if (i == 0) j = 0;
-            //fprintf(fptr,"%d, %lx, %lx, %ld\n", i, s_start_t[i+8], s_end_t[i+8], s_bits[i+8]);
-            fprintf(fptr, "%d, %lx, %lx, %lx, %ld\n", i, s_start_t[i + 8], s_end_t[i + 8], s_start_t[i + 8] - s_start_t[i + 7], s_bits[i + 8]);
-        }
-        fclose(fptr);
-    }
+    //    FILE* fptr = fopen("SENDER_dbg.txt", "w");
+    //    fprintf(fptr, "SENDER done. index, start_t, end_t, start_t delta from rev, value\n");
+    //    for (int i = 0; i < send_count - 8; i++) {
+    //        int j = i - 1;
+    //        if (i == 0) j = 0;
+    //        //fprintf(fptr,"%d, %lx, %lx, %ld\n", i, s_start_t[i+8], s_end_t[i+8], s_bits[i+8]);
+    //        fprintf(fptr, "%d, %lx, %lx, %lx, %ld\n", i, s_start_t[i + 8], s_end_t[i + 8], s_start_t[i + 8] - s_start_t[i + 7], s_bits[i + 8]);
+    //    }
+    //    fclose(fptr);
+    //}
 
 /////debug
 

@@ -1,3 +1,4 @@
+killall -9 receiver
 rm -f rec.out;
 
 for i in {0..4}; do

@@ -108,15 +108,15 @@ bool detect_bit(struct config *config)
   }
 
   ///// DEGBUG code/////
-  if (SYNC_DBG) {
-      if (handshake_done) {
-          r_bits[detection_count] = detected_bit;
-          detect_start_t[detection_count] = start_t & (0xFFF0000);
-          detect_end_t[detection_count] = rdtscp() & (0xFFF0000);
-          detection_count++;
-          if (detection_count > 200) printf("detection count over 200\n");
-      }
-  }
+  //if (SYNC_DBG) {
+  //    if (handshake_done) {
+  //        r_bits[detection_count] = detected_bit;
+  //        detect_start_t[detection_count] = start_t & (0xFFF0000);
+  //        detect_end_t[detection_count] = rdtscp() & (0xFFF0000);
+  //        detection_count++;
+  //        if (detection_count > 200) printf("detection count over 200\n");
+  //    }
+  //}
 
   ///// DEGBUG code/////
 
@@ -270,18 +270,18 @@ int main(int argc, char **argv)
   /*   /\* printf("DEBUG_ARRAY[%d]: %ld\n",i,debug_array[i]); *\/ */
   /* } */
 
-  if (SYNC_DBG) {
-      sleep(2);
-      FILE* fptr = fopen("RECV_dbg.txt", "w");
-      fprintf(fptr, "receiver done. index, start_t, end_t, start_t delta from rev, value\n");
-      for (int i = 0; i < detection_count; i++) {
-          //fprintf(fptr,"%d, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
-          int j = i - 1;
-          if (i == 0) j = 0;
-          fprintf(fptr, "%d, %lx, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], detect_start_t[i] - detect_start_t[j], r_bits[i]);
-      }
-      fclose(fptr);
-  }
+  //if (SYNC_DBG) {
+  //    sleep(2);
+  //    FILE* fptr = fopen("RECV_dbg.txt", "w");
+  //    fprintf(fptr, "receiver done. index, start_t, end_t, start_t delta from rev, value\n");
+  //    for (int i = 0; i < detection_count; i++) {
+  //        //fprintf(fptr,"%d, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], r_bits[i]);
+  //        int j = i - 1;
+  //        if (i == 0) j = 0;
+  //        fprintf(fptr, "%d, %lx, %lx, %lx, %ld\n", i, detect_start_t[i], detect_end_t[i], detect_start_t[i] - detect_start_t[j], r_bits[i]);
+  //    }
+  //    fclose(fptr);
+  //}
 
   
   return 0;
