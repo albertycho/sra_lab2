@@ -43,17 +43,16 @@ void maccess(ADDR_PTR addr)
 CYCLES maccess_t(ADDR_PTR addr)
 {
   CYCLES cycles;
-  
-
-
 
   ///////////Working on single asm volatile version
   asm volatile (
 		"rdtscp\n"
 		"shl $32,%%rdx\n"
 		"or %%rdx, %%rax\n"
+                "lfence\n"
 		"movq %%rax, %%rbx\n"//starttime in rbx
 		"movq (%%rdi), %%rsi\n"//maccess
+                "lfence\n"
 		"rdtscp\n"
                 "shl $32,%%rdx\n"
     	        "or %%rdx, %%rax\n"

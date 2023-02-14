@@ -5,6 +5,7 @@
 // SET FOR YOUR SYSTEM
 //********************
 int CACHE_MISS_LATENCY = 180;
+//int CACHE_MISS_LATENCY = 250;
 int CPU_FREQ_MHZ       = 3800;
 //--------------------
 
