@@ -1,0 +1,105 @@
+-------------------
+Flush Reload Covert Channel Receiver CS7292 Asst-2 v1.0
+-------------------
+
+sync_time_mask : 0x3fff cycles // Sync time window for each bit
+tx_interval    : 0x4000 cycles // Interval for tranmission within each sync time window
+Listening...
+
+-------------------
+Rx> Clever Hans
+rx bit-string : [32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m
+Tx> Clever Hans
+tx bit-string : 0100001101101100011001010111011001100101011100100010000001001000011000010110111001110011
+
+-------------------
+Receiver finished
+Correct Bits-Percentage= 100.0000% (88/88)
+Transmission Bit-rate= 26315.79 Bytes/Sec
+-------------------
+
+\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n
+-------------------
+Flush Reload Covert Channel Receiver CS7292 Asst-2 v1.0
+-------------------
+
+sync_time_mask : 0x3fff cycles // Sync time window for each bit
+tx_interval    : 0x4000 cycles // Interval for tranmission within each sync time window
+Listening...
+
+-------------------
+Rx> Clever Hans
+rx bit-string : [32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m
+Tx> Clever Hans
+tx bit-string : 0100001101101100011001010111011001100101011100100010000001001000011000010110111001110011
+
+-------------------
+Receiver finished
+Correct Bits-Percentage= 100.0000% (88/88)
+Transmission Bit-rate= 26315.79 Bytes/Sec
+-------------------
+
+\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n
+-------------------
+Flush Reload Covert Channel Receiver CS7292 Asst-2 v1.0
+-------------------
+
+sync_time_mask : 0x3fff cycles // Sync time window for each bit
+tx_interval    : 0x4000 cycles // Interval for tranmission within each sync time window
+Listening...
+
+-------------------
+Rx> Clever Hans
+rx bit-string : [32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m
+Tx> Clever Hans
+tx bit-string : 0100001101101100011001010111011001100101011100100010000001001000011000010110111001110011
+
+-------------------
+Receiver finished
+Correct Bits-Percentage= 100.0000% (88/88)
+Transmission Bit-rate= 26315.79 Bytes/Sec
+-------------------
+
+\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n
+-------------------
+Flush Reload Covert Channel Receiver CS7292 Asst-2 v1.0
+-------------------
+
+sync_time_mask : 0x3fff cycles // Sync time window for each bit
+tx_interval    : 0x4000 cycles // Interval for tranmission within each sync time window
+Listening...
+
+-------------------
+Rx> Clever Hans
+rx bit-string : [32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m
+Tx> Clever Hans
+tx bit-string : 0100001101101100011001010111011001100101011100100010000001001000011000010110111001110011
+
+-------------------
+Receiver finished
+Correct Bits-Percentage= 100.0000% (88/88)
+Transmission Bit-rate= 26315.79 Bytes/Sec
+-------------------
+
+\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n
+-------------------
+Flush Reload Covert Channel Receiver CS7292 Asst-2 v1.0
+-------------------
+
+sync_time_mask : 0x3fff cycles // Sync time window for each bit
+tx_interval    : 0x4000 cycles // Interval for tranmission within each sync time window
+Listening...
+
+-------------------
+Rx> Clever Hans
+rx bit-string : [32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m0[0m[32m0[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m[32m1[0m[32m0[0m[32m0[0m[32m1[0m[32m1[0m
+Tx> Clever Hans
+tx bit-string : 0100001101101100011001010111011001100101011100100010000001001000011000010110111001110011
+
+-------------------
+Receiver finished
+Correct Bits-Percentage= 100.0000% (88/88)
+Transmission Bit-rate= 26315.79 Bytes/Sec
+-------------------
+
+\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n

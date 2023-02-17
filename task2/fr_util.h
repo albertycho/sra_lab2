@@ -24,14 +24,14 @@
 #define CYCLES uint64_t
 
 //Channel parameters
-//#define TX_INTERVAL_DEF               0x00030000
-//#define SYNC_TIME_MASK_DEF            0x0003FFFF
-//#define SYNC_JITTER_DEF                  0x01000
+#define TX_INTERVAL_DEF               0x00030000
+#define SYNC_TIME_MASK_DEF            0x0003FFFF
+#define SYNC_JITTER_DEF                  0x01000
 
 //// Task3
-#define TX_INTERVAL_DEF               0x00004000
-#define SYNC_TIME_MASK_DEF            0x00003FFF
-#define SYNC_JITTER_DEF                  0x00800
+//#define TX_INTERVAL_DEF               0x00004000
+//#define SYNC_TIME_MASK_DEF            0x00003FFF
+//#define SYNC_JITTER_DEF                  0x00800
 
 
 //Shared memory
